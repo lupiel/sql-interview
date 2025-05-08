@@ -1,5 +1,28 @@
 ```sql
 SELECT
+  emp_name,
+  salary,
+  RANK() OVER (ORDER BY salary) AS rank_order,
+  DENSE_RANK() OVER (ORDER BY salary) AS dense_rank_order,
+  ROW_NUMBER() OVER (ORDER BY salary) AS row_number_order
+FROM interview.employees
+ORDER BY salary
+```
+| emp_name | salary | rank_order | dense_rank_order | row_number_order |
+|----------|--------|------------|------------------|------------------|
+| Ivan     | 70000  | 1          | 1                | 1                |
+| Heidi    | 75000  | 2          | 2                | 2                |
+| Charlie  | 85000  | 3          | 3                | 3                |
+| Frank    | 85000  | 3          | 3                | 4                |
+| Bob      | 90000  | 5          | 4                | 5                |
+| Eve      | 90000  | 5          | 4                | 6                |
+| Dave     | 95000  | 7          | 5                | 7                |
+| Grace    | 100000 | 8          | 6                | 8                |
+| Alice    | 120000 | 9          | 7                | 9                |
+
+
+```sql
+SELECT
   product_id,
   DATE_TRUNC(sale_date, DAY) sale_day,
   revenue,
@@ -66,27 +89,4 @@ ORDER BY product_id, sale_day
 | 102        | 2024-02-14 | 950     | 950                   | 2880          | 12462          |                 | 950        | 950       | 980                           | 6                             | 409              | 1900                |
 | 102        | 2024-02-15 | 950     | 1900                  | 2880          | 12463          | 950             | 950        | 950       | 980                           | 6                             | 409              | 1900                |
 | 102        | 2024-02-26 | 980     | 2880                  | 2880          | 12474          | 1900            | 950        | 980       | 980                           | 4                             | 409              | 1900                |
-
-
-```sql
-SELECT
-  emp_name,
-  salary,
-  RANK() OVER (ORDER BY salary) AS rank_order,
-  DENSE_RANK() OVER (ORDER BY salary) AS dense_rank_order,
-  ROW_NUMBER() OVER (ORDER BY salary) AS row_number_order
-FROM interview.employees
-ORDER BY salary
-```
-| emp_name | salary | rank_order | dense_rank_order | row_number_order |
-|----------|--------|------------|------------------|------------------|
-| Ivan     | 70000  | 1          | 1                | 1                |
-| Heidi    | 75000  | 2          | 2                | 2                |
-| Charlie  | 85000  | 3          | 3                | 3                |
-| Frank    | 85000  | 3          | 3                | 4                |
-| Bob      | 90000  | 5          | 4                | 5                |
-| Eve      | 90000  | 5          | 4                | 6                |
-| Dave     | 95000  | 7          | 5                | 7                |
-| Grace    | 100000 | 8          | 6                | 8                |
-| Alice    | 120000 | 9          | 7                | 9                |
 
